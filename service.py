@@ -4,7 +4,7 @@
 from socket import *
 from time import ctime
 
-HOST = 'localhost'
+HOST = ''
 PORT = 21566
 ADDR = (HOST,PORT,)
 
@@ -20,10 +20,10 @@ while True:
     print('connected from: ',addr)
 
     while True:
-        data = tcpClinSock.recv(BUFSIZE)
+        data = tcpClinSock.recv(BUFSIZE).decode()
         if not data:
             break
-        tcpClinSock.send('[%s] %s' % (bytes(ctime(),'utf-8'),data))
+        tcpClinSock.send(('[%s] %s' % (ctime(),data)).encode())
 
     tcpClinSock.close()
 tcpServSock.close()
